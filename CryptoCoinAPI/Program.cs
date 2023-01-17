@@ -13,6 +13,6 @@ using DobriyCoder.Core.Exceptions;
 //var coin = Coingecko.GetCoin("bitcoin");
 //coin.PrintAsJson();
 
-var coinList = Coingecko.GetCoins(new List<string> { "bitcoin"/*, "darkknight" */});
+var coinList = Coingecko.GetCoins(new List<string> { "bitcoin", "darkknight" });
 foreach(var coin in coinList)
     coin.PrintAsJson();
