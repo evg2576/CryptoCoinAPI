@@ -17,15 +17,14 @@ using System.Web;
 using System;
 using System.Text;
 
-var coin = Coingecko.GetCoin("bitcoin", out IErrors? errors);
-if (errors is not null)
-    coin.PrintAsJson();
+Coingecko coingecko = new Coingecko();
 
-//var coinList = Coingecko.GetCoins(new List<string> { "bitcoin", "darkknight", "01coin" }, out IErrors? errors);
-//if (errors is not null)
-//    foreach (var coin in coinList)
-//        coin.PrintAsJson();
-//else errors.PrintAsJson();
+//var coin = await coingecko.GetCoin("bitcoin");
+//    coin.PrintAsJson();
+
+var coinList = await coingecko.GetCoins(new List<string> { "bitcoin", "darkknight", "01coin" });
+foreach (var coin in coinList)
+    coin.PrintAsJson();
 
 //////////////////////////////////
 
