@@ -1,4 +1,6 @@
 ﻿using DobriyCoder.Core.Common;
+using DobriyCoder.Core.Exceptions;
+using System.Reflection;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace CryptoCoinAPI
@@ -44,7 +46,25 @@ namespace CryptoCoinAPI
             try
             {
                 string[] coins = pairId.ToLower().Split(new char[] { '-' });
-                return await APIHandler<CoingeckoPairData>.GetDataAsync($"https://api.coingecko.com/api/v3/simple/price?ids={coins[0]}&vs_currencies={coins[1]}");
+                string coinId = coins[0];
+                string vsCoinId = coins[1];
+                //List<FieldInfo> res2 = new List<FieldInfo>();
+                //var res = await GetCoin(coinId);
+                //foreach (FieldInfo field in res.GetType().GetFields())
+                //{
+                //    if (field.GetType() == typeof(Dictionary<string, decimal>))
+                //        res2.Add(field);
+                //}
+                //res.GetType().GetFields().PrintAsJson();
+                //return res;
+                CoingeckoPairData res = await APIHandler<CoingeckoPairData>.GetDataAsync($"https://api.coingecko.com/api/v3/coins/{coinId.ToLower()}");
+                res.vsSymbol = vsCoinId;
+                var res2 = res as object;
+                foreach (FieldInfo field in res2.GetType().GetFields())
+                {
+                    Console.WriteLine(1);
+                }
+                return res;
             }
             catch (Exception ex)
             {
