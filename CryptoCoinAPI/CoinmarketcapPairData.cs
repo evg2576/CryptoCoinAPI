@@ -1,7 +1,6 @@
 ﻿namespace CryptoCoinAPI
 {
-    public class Coinmarketcap
+    public class CoinmarketcapPairData
     {
-
     }
 }

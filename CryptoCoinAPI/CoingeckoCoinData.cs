@@ -1,23 +1,26 @@
-﻿namespace CryptoCoinAPI
+﻿using DobriyCoder.Core.Common;
+
+namespace CryptoCoinAPI
 {
 
     public class CoingeckoCoinData
     {
+        IErrors? Errors { get; set; }
         public string? id { get; set; }
         public string? symbol { get; set; }
         public string? name { get; set; }
         public object? asset_platform_id { get; set; }
-        public Platforms? platforms { get; set; }
-        public Detail_Platforms? detail_platforms { get; set; }
+        public Dictionary<string, object>? platforms { get; set; }
+        public Dictionary<string, object>? detail_platforms { get; set; }
         public double? block_time_in_minutes { get; set; }
         public string? hashing_algorithm { get; set; }
         public string[]? categories { get; set; }
         public object? public_notice { get; set; }
         public object[]? additional_notices { get; set; }
-        public Localization? localization { get; set; }
-        public Description? description { get; set; }
-        public Links? links { get; set; }
-        public Image? image { get; set; }
+        public Dictionary<string, object>? localization { get; set; }
+        public Dictionary<string, object>? description { get; set; }
+        public Dictionary<string, object>? links { get; set; }
+        public Dictionary<string, object>? image { get; set; }
         public string? country_origin { get; set; }
         public string? genesis_date { get; set; }
         public double? sentiment_votes_up_percentage { get; set; }
@@ -30,132 +33,18 @@
         public double? liquidity_score { get; set; }
         public double? public_doubleerest_score { get; set; }
         public Market_Data? market_data { get; set; }
-        public Community_Data? community_data { get; set; }
-        public Developer_Data? developer_data { get; set; }
-        public Public_doubleerest_Stats? public_doubleerest_stats { get; set; }
+        public Dictionary<string, object>? community_data { get; set; }
+        public Dictionary<string, object>? developer_data { get; set; }
+        public Dictionary<string, object>? public_doubleerest_stats { get; set; }
         public object[]? status_updates { get; set; }
         public DateTime last_updated { get; set; }
         public Ticker[]? tickers { get; set; }
-    }
-
-    public class Platforms
-    {
-        public string? _ { get; set; }
-    }
-
-    public class Detail_Platforms
-    {
-        public Child? _ { get; set; }
     }
 
     public class Child
     {
         public object? decimal_place { get; set; }
         public string? contract_address { get; set; }
-    }
-
-    public class Localization
-    {
-        public string? en { get; set; }
-        public string? de { get; set; }
-        public string? es { get; set; }
-        public string? fr { get; set; }
-        public string? it { get; set; }
-        public string? pl { get; set; }
-        public string? ro { get; set; }
-        public string? hu { get; set; }
-        public string? nl { get; set; }
-        public string? pt { get; set; }
-        public string? sv { get; set; }
-        public string? vi { get; set; }
-        public string? tr { get; set; }
-        public string? ru { get; set; }
-        public string? ja { get; set; }
-        public string? zh { get; set; }
-        public string? zhtw { get; set; }
-        public string? ko { get; set; }
-        public string? ar { get; set; }
-        public string? th { get; set; }
-        public string? id { get; set; }
-        public string? cs { get; set; }
-        public string? da { get; set; }
-        public string? el { get; set; }
-        public string? hi { get; set; }
-        public string? no { get; set; }
-        public string? sk { get; set; }
-        public string? uk { get; set; }
-        public string? he { get; set; }
-        public string? fi { get; set; }
-        public string? bg { get; set; }
-        public string? hr { get; set; }
-        public string? lt { get; set; }
-        public string? sl { get; set; }
-    }
-
-    public class Description
-    {
-        public string? en { get; set; }
-        public string? de { get; set; }
-        public string? es { get; set; }
-        public string? fr { get; set; }
-        public string? it { get; set; }
-        public string? pl { get; set; }
-        public string? ro { get; set; }
-        public string? hu { get; set; }
-        public string? nl { get; set; }
-        public string? pt { get; set; }
-        public string? sv { get; set; }
-        public string? vi { get; set; }
-        public string? tr { get; set; }
-        public string? ru { get; set; }
-        public string? ja { get; set; }
-        public string? zh { get; set; }
-        public string? zhtw { get; set; }
-        public string? ko { get; set; }
-        public string? ar { get; set; }
-        public string? th { get; set; }
-        public string? id { get; set; }
-        public string? cs { get; set; }
-        public string? da { get; set; }
-        public string? el { get; set; }
-        public string? hi { get; set; }
-        public string? no { get; set; }
-        public string? sk { get; set; }
-        public string? uk { get; set; }
-        public string? he { get; set; }
-        public string? fi { get; set; }
-        public string? bg { get; set; }
-        public string? hr { get; set; }
-        public string? lt { get; set; }
-        public string? sl { get; set; }
-    }
-
-    public class Links
-    {
-        public string[]? homepage { get; set; }
-        public string[]? blockchain_site { get; set; }
-        public string[]? official_forum_url { get; set; }
-        public string[]? chat_url { get; set; }
-        public string[]? announcement_url { get; set; }
-        public string? twitter_screen_name { get; set; }
-        public string? facebook_username { get; set; }
-        public object? bitcodoublealk_thread_identifier { get; set; }
-        public string? telegram_channel_identifier { get; set; }
-        public string? subreddit_url { get; set; }
-        public Repos_Url? repos_url { get; set; }
-    }
-
-    public class Repos_Url
-    {
-        public string[]? github { get; set; }
-        public object[]? bitbucket { get; set; }
-    }
-
-    public class Image
-    {
-        public string? thumb { get; set; }
-        public string? small { get; set; }
-        public string? large { get; set; }
     }
 
     public class Market_Data
