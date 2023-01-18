@@ -22,15 +22,14 @@ Coingecko coingecko = new Coingecko();
 //var coin = await coingecko.GetCoin("bitcoin");
 //    coin.PrintAsJson();
 
-var coinList = await coingecko.GetCoins(new List<string> { "bitcoin", "darkknight", "01coin" });
-foreach (var coin in coinList)
-    coin.PrintAsJson();
+//var coinList = await coingecko.GetCoins(new List<string> { "bitcoin", "darkknight", "01coin" });
+//foreach (var coin in coinList)
+//    coin.PrintAsJson();
 
 //////////////////////////////////
 
-//var pair = Coingecko.GetPair("bitcoin, bnb", out IErrors? errors);
-//if (errors is not null)
-//    pair.PrintAsJson();
+var pair = await coingecko.GetPair("bitcoin-bnb");
+    pair.PrintAsJson();
 
 /// ///////////////////////////////////////
 
