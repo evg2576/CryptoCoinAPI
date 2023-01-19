@@ -1,75 +1,76 @@
 ﻿using DobriyCoder.Core.Common;
-using DobriyCoder.Core.Exceptions;
-using System.Reflection;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace CryptoCoinAPI
 {
     public class Coingecko
     {
-        public async Task<CoingeckoCoinData> GetCoin(string id)
+        public async Task<CoingeckoCoinData> GetCoin(string symbol)
         {
             IErrors? errors = new Errors();
             try
             {
-                return await APIHandler<CoingeckoCoinData>.GetDataAsync($"https://api.coingecko.com/api/v3/coins/{id.ToLower()}");
+                return await APIHandler<CoingeckoCoinData>.GetDataAsync($"https://api.coingecko.com/api/v3/coins/{symbol.ToLower()}");
             }
             catch (Exception ex)
             {
                 errors.ErrorsList.Add(new Error(ex.Message));
-                return new CoingeckoCoinData { Errors = errors };
+                return new CoingeckoCoinData { errors = errors };
             }
         }
 
-        public async Task<List<CoingeckoCoinData>> GetCoins(List<string> ids)
+        public async Task<List<CoingeckoCoinData>> GetCoins(List<string> symbols)
         {
             IErrors? errors = new Errors();
             try
             {
                 List<CoingeckoCoinData> res = new List<CoingeckoCoinData>();
-                foreach (string id in ids)
+                foreach (string symbol in symbols)
                 {
-                    res.Add(await GetCoin(id));
+                    res.Add(await GetCoin(symbol));
                 }
                 return res;
             }
             catch (Exception ex)
             {
                 errors.ErrorsList.Add(new Error(ex.Message));
-                return new List<CoingeckoCoinData> { new CoingeckoCoinData { Errors = errors } };
+                return new List<CoingeckoCoinData> { new CoingeckoCoinData { errors = errors } };
             }
         }
 
-        public async Task<CoingeckoPairData> GetPair(string pairId)
+        public async Task<CoingeckoPairData> GetPair(string pairSymbol)
         {
             IErrors? errors = new Errors();
             try
             {
-                string[] coins = pairId.ToLower().Split(new char[] { '-' });
-                string coinId = coins[0];
-                string vsCoinId = coins[1];
-                //List<FieldInfo> res2 = new List<FieldInfo>();
-                //var res = await GetCoin(coinId);
-                //foreach (FieldInfo field in res.GetType().GetFields())
-                //{
-                //    if (field.GetType() == typeof(Dictionary<string, decimal>))
-                //        res2.Add(field);
-                //}
-                //res.GetType().GetFields().PrintAsJson();
-                //return res;
-                CoingeckoPairData res = await APIHandler<CoingeckoPairData>.GetDataAsync($"https://api.coingecko.com/api/v3/coins/{coinId.ToLower()}");
-                res.vsSymbol = vsCoinId;
-                var res2 = res as object;
-                foreach (FieldInfo field in res2.GetType().GetFields())
+                string[] coins = pairSymbol.ToLower().Split(new char[] { '-' });
+                string coin1Symbol = coins[0];
+                string coin2Symbol = coins[1];
+                CoingeckoCoinData coin1 = await GetCoin(coin1Symbol);
+                return new CoingeckoPairData { coin1 = coin1, coin2Symbol = coin2Symbol };
+            }
+            catch (Exception ex)
+            {
+                errors.ErrorsList.Add(new Error(ex.Message));
+                return new CoingeckoPairData { errors = errors };
+            }
+        }
+
+        public async Task<List<CoingeckoPairData>> GetPairs(List<string> pairSymbols)
+        {
+            IErrors? errors = new Errors();
+            try
+            {
+                List<CoingeckoPairData> res = new List<CoingeckoPairData>();
+                foreach (string pairSymbol in pairSymbols)
                 {
-                    Console.WriteLine(1);
+                    res.Add(await GetPair(pairSymbol));
                 }
                 return res;
             }
             catch (Exception ex)
             {
                 errors.ErrorsList.Add(new Error(ex.Message));
-                return new CoingeckoPairData { Errors = errors };
+                return new List<CoingeckoPairData> { new CoingeckoPairData { errors = errors } };
             }
         }
     }

@@ -4,7 +4,7 @@ namespace CryptoCoinAPI
 {
     public class CoingeckoCoinData
     {
-        public IErrors? Errors { get; set; }
+        public IErrors? errors { get; set; }
         public string? id { get; set; }
         public string? symbol { get; set; }
         public string? name { get; set; }
@@ -31,7 +31,7 @@ namespace CryptoCoinAPI
         public double? community_score { get; set; }
         public double? liquidity_score { get; set; }
         public double? public_doubleerest_score { get; set; }
-        public Market_Data? market_data { get; set; }
+        public MarketData? market_data { get; set; }
         public Dictionary<string, object>? community_data { get; set; }
         public Dictionary<string, object>? developer_data { get; set; }
         public Dictionary<string, object>? public_doubleerest_stats { get; set; }
@@ -40,7 +40,7 @@ namespace CryptoCoinAPI
         public Ticker[]? tickers { get; set; }
     }
 
-    public class Market_Data
+    public class MarketData
     {
         public Dictionary<string, decimal>? current_price { get; set; }
         public object? total_value_locked { get; set; }
